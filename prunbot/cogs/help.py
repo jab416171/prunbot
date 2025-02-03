@@ -68,6 +68,20 @@ class HelpCog(commands.Cog):
         except:
             pass
 
+    @commands.Cog.listener()
+    async def on_message_edit(self, message_before, message_after):
+        if message_before.content != message_after.content:
+            await self.bot.process_commands(message_after)
+
+    @commands.Cog.listener()
+    async def on_command_error(self, ctx, error):
+        """ Send help message when a mis-entered command is received. """
+
+        print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
+        traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
+        if isinstance(error, commands.NotOwner):
+            await ctx.reply("Only the owner of the bot can use this command!", delete_after=30)
+
 
 def setup(bot):
     bot.add_cog(HelpCog(bot))

@@ -1,4 +1,4 @@
-# simplebot.py
+# prunbot.py
 
 from discord.ext import commands
 import discord
@@ -20,14 +20,14 @@ class Bot(commands.Bot):
         super().__init__(*args, **kwargs)
         self.load_extension("jishaku")
 
-    async def on_connect(self):
-        await self.sync_commands(force=True)
+    # async def on_connect(self):
+    #     await self.sync_commands(force=True)
 
 def run(discord_token):
     """ Create the bot, add the cogs and run it. """
-    bot = Bot(command_prefix=('s!'), case_insensitive=True, debug_guilds=[881207955029110855], intents=discord.Intents.all())
+    bot = Bot(command_prefix=('s!'), case_insensitive=True, intents=discord.Intents.default())
 
-    for filename in os.listdir('simplebot/cogs'):
+    for filename in os.listdir('prunbot/cogs'):
         if filename.endswith('.py'):
             bot.load_extension(f'cogs.{filename[:-3]}')
 

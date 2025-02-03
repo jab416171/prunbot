@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-import simplebot
+import prunbot
 
 DISCORD_TOKEN = 'mydiscordtoken'
-simplebot.run(discord_token=DISCORD_TOKEN)
+prunbot.run(discord_token=DISCORD_TOKEN)
