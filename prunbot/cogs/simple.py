@@ -15,8 +15,8 @@ class SimpleCog(commands.Cog):
             "JAB416171": {
                 "ANT":[
                         {"item": "COF", "price": 650, "reserve": 846, "reserve_percent": 0.5},
-                        {"item": "FIM", "price": 1500, "reserve": 0, "reserve_percent": 0.5},
-                        {"item": "MEA", "price": 4000, "reserve": 0, "reserve_percent": 0.5},
+                        # {"item": "FIM", "price": 1500, "reserve": 0, "reserve_percent": 0.5},
+                        # {"item": "MEA", "price": 4000, "reserve": 0, "reserve_percent": 0.5},
                         {"item": "C", "price": 600, "reserve": 0, "reserve_percent": 0.5},
                         {"item": "BBH", "price": 1800, "reserve": 300, "reserve_percent": 0.5},
                         {"item": "BSE", "price": 1200, "reserve": 300, "reserve_percent": 0.5},
@@ -62,6 +62,12 @@ class SimpleCog(commands.Cog):
 
 # Username	NaturalId	Name	StorageType	Ticker	Amount
 # JAB416171	ANT	Antares Station	WAREHOUSE_STORE	ABH	11
+
+    @slash_command(name="post_storefront", integration_types={discord.IntegrationType.user_install, discord.IntegrationType.guild_install})
+    @option("user", description="user", choices=[list(p.keys())[0] for p in posts])
+    async def post_storefront(self, ctx: discord.ApplicationContext, user: str):
+        await ctx.respond("WIP", ephemeral=True)
+
     @slash_command(name="post_embed", integration_types={discord.IntegrationType.user_install, discord.IntegrationType.guild_install})
     @option("user", description="user", choices=[list(p.keys())[0] for p in posts])
     async def post_embed(self, ctx: discord.ApplicationContext, user: str):
