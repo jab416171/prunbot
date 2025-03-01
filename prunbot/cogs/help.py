@@ -31,7 +31,7 @@ class HelpCog(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         """ Set presence to let users know the help command. """
-        activity = discord.Activity(type=discord.ActivityType.listening, name="I am a simple discord bot")
+        activity = discord.Activity(type=discord.ActivityType.playing, name="PrUn Internal Market Info")
         await self.bot.change_presence(activity=activity)
 
     async def cog_before_invoke(self, ctx):
