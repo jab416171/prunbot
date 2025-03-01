@@ -8,6 +8,8 @@ import aiohttp
 import os
 
 class SimpleCog(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
     apikey = os.environ['PRUN_APIKEY']
     inventory_base_url = f'https://rest.fnar.net/csv/inventory?apikey={apikey}&username=USERNAME'
     posts = [
