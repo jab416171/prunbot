@@ -116,7 +116,7 @@ class SimpleCog(commands.Cog):
             await ctx.respond("User not found", ephemeral=True)
     @slash_command(name="invite", integration_types={discord.IntegrationType.user_install, discord.IntegrationType.guild_install})
     async def invite(self, ctx: discord.ApplicationContext):
-        await ctx.send(f"Invite link is https://discord.com/api/oauth2/authorize?client_id={self.bot.user.id}&permissions=8&scope=bot%20applications.commands")
+        await ctx.respond(f"Invite link is https://discord.com/api/oauth2/authorize?client_id={self.bot.user.id}&permissions=8&scope=bot%20applications.commands")
 
 def setup(bot):
     bot.add_cog(SimpleCog(bot))
