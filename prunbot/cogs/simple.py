@@ -20,8 +20,8 @@ class SimpleCog(commands.Cog):
                         # {"item": "FIM", "price": 1500, "reserve": 0, "reserve_percent": 0.5},
                         # {"item": "MEA", "price": 4000, "reserve": 0, "reserve_percent": 0.5},
                         {"item": "C", "price": 600, "reserve": 0, "reserve_percent": 0.5},
-                        {"item": "BBH", "price": 1800, "reserve": 300, "reserve_percent": 0.5},
-                        {"item": "BSE", "price": 1200, "reserve": 300, "reserve_percent": 0.5},
+                        {"item": "BBH", "price": 1800, "reserve": 3000, "reserve_percent": 0.5},
+                        {"item": "BSE", "price": 1200, "reserve": 3000, "reserve_percent": 0.5},
 
                 ],
                 "HRT": [
