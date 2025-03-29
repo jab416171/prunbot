@@ -16,16 +16,16 @@ class SimpleCog(commands.Cog):
         {
             "JAB416171": {
                 "ANT":[
-                        {"item": "COF", "price": 650, "reserve": 846, "reserve_percent": 0.5},
-                        # {"item": "FIM", "price": 1500, "reserve": 0, "reserve_percent": 0.5},
-                        # {"item": "MEA", "price": 4000, "reserve": 0, "reserve_percent": 0.5},
+                        {"item": "COF", "price": 650, "reserve": 2000, "reserve_percent": 0.5},
+                        {"item": "FIM", "price": 1500, "reserve": 10000, "reserve_percent": 0.5},
+                        {"item": "MEA", "price": 4000, "reserve": 10000, "reserve_percent": 0.5},
                         {"item": "C", "price": 600, "reserve": 0, "reserve_percent": 0.5},
                         {"item": "BBH", "price": 1800, "reserve": 3000, "reserve_percent": 0.5},
                         {"item": "BSE", "price": 1200, "reserve": 3000, "reserve_percent": 0.5},
 
                 ],
                 "HRT": [
-                        {"item": "COF", "price": 650, "reserve": 595, "reserve_percent": 0.5},
+                        {"item": "COF", "price": 650, "reserve": 2000, "reserve_percent": 0.5},
                         {"item": "FIM", "price": 1500, "reserve": 0, "reserve_percent": 0.5},
                         {"item": "MEA", "price": 4000, "reserve": 0, "reserve_percent": 0.5},
                         {"item": "ALE", "price": 900, "reserve": 0, "reserve_percent": 0.5},
