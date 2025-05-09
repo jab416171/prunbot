@@ -7,3 +7,6 @@ jishaku==2.3.2
 aiosqlite
 aiohttp
 python-dotenv
+SQLAlchemy
+alembic
+google-cloud-storage

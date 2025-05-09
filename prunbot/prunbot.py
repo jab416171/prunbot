@@ -2,6 +2,7 @@
 
 from discord.ext import commands
 import discord
+from db import DB
 import os
 import logging
 import sys
@@ -18,6 +19,7 @@ logger.addHandler(handler2)
 class Bot(commands.Bot):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.db = DB()
         self.load_extension("jishaku")
 
     # async def on_connect(self):

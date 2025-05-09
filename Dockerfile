@@ -8,5 +8,9 @@ ARG token=
 ENV TOKEN="${token}"
 ARG prun_apikey=
 ENV PRUN_APIKEY="${prun_apikey}"
+ARG sql_db=
+ENV SQL_DB="${sql_db}"
+ARG google_application_credentials=
+ENV GOOGLE_APPLICATION_CREDENTIALS="${google_application_credentials}"
 copy . /
 entrypoint ["python", "/prunbot/run.py"]
