@@ -321,7 +321,7 @@ class SimpleCog(commands.Cog):
         if not await self.is_registered(ctx):
             await ctx.respond("Please register first with /register", ephemeral=True)
             return
-        embeds, timestamps = await self.generate_storefront_embeds(ctx.guild, ctx.author.id)
+        embeds, timestamps = await self.generate_storefront_embeds(ctx.guild, ctx.author)
         oldest_timestamp = self.get_oldest_timestamp(timestamps)
         oldest_timestamp = discord.utils.format_dt(oldest_timestamp)
         response = await ctx.respond(f"Last updated at {oldest_timestamp}", embeds=embeds)
@@ -348,23 +348,23 @@ class SimpleCog(commands.Cog):
             await self.save(storefront_message, engine=engine)
             await session.commit()
 
-    async def generate_storefront_embeds(self, guild, user_id):
-        print(f"Generating storefront embeds for user {user_id}")
+    async def generate_storefront_embeds(self, guild, user):
+        print(f"Generating storefront embeds for user {user}")
         engine = await self.bot.db.getEngine()
         async with engine.begin() as session:
             # Fetch offers for the user
             offers = await session.execute(
-                sqlalchemy.select(Offer).where(Offer.id == user_id)
+                sqlalchemy.select(Offer).where(Offer.id == user.id)
             )
             offers = offers.all()
 
             # Fetch inventory for the user
             user_inventory = await session.execute(
-                sqlalchemy.select(Inventory).where(Inventory.user_id == user_id)
+                sqlalchemy.select(Inventory).where(Inventory.user_id == user.id)
             )
             user_inventory = user_inventory.all()
             prun_user = await session.execute(
-                sqlalchemy.select(User).where(User.id == user_id)
+                sqlalchemy.select(User).where(User.id == user.id)
             )
             prun_user = prun_user.first()
             prun_user_name = prun_user.prun_user if prun_user else "Unknown User"
@@ -405,11 +405,13 @@ class SimpleCog(commands.Cog):
                         break
                 stock = inventory - reserve
                 stock = int(stock * reserve_percent)
-                if stock <= 0:
+                if stock <= 0 and offer.item_location == location and not offer.display_if_zero:
                     fields.append((f"{ticker} - ${price}", "Out of Stock"))
                 else:
                     fields.append((f"{ticker} - ${price}", f"{stock} In Stock, ${stock * price} to buy all"))
 
+            if not fields:
+                continue
             for name, value in fields:
                 embed.add_field(name=name, value=value, inline=False)
             if notes:
@@ -438,6 +440,7 @@ class SimpleCog(commands.Cog):
 
                 # Fetch the message from the channel
                 channel = guild.get_channel(channel_id)
+                user = await self.bot.fetch_user(user_id)
                 if channel:
                     try:
                         msg = await channel.fetch_message(discord_message_id)
@@ -445,7 +448,7 @@ class SimpleCog(commands.Cog):
                         if msg:
                             # Regenerate the embeds and edit the message
                             print(f"Regenerating embeds for message {discord_message_id}")
-                            embeds, timestamps = await self.generate_storefront_embeds(guild, user_id)
+                            embeds, timestamps = await self.generate_storefront_embeds(guild, user)
                             oldest_timestamp = self.get_oldest_timestamp(timestamps)
                             oldest_timestamp = discord.utils.format_dt(oldest_timestamp)
                             await msg.edit(content=f"Last updated at {oldest_timestamp}", embeds=embeds)
